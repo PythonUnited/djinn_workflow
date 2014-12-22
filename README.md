@@ -1,4 +1,4 @@
 djinn_workflow
-==============
+===================
 
-Djinn intranet workflow module
+Provide workflow for Djinn.
