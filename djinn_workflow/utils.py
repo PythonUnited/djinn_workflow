@@ -83,6 +83,6 @@ def apply_transition(obj, trans):
 
     set_state(obj, trans.destination)
 
-    state_change.send(get_workflow(obj), instance=obj,
+    state_change.send(obj.__class__, instance=obj,
                       state_from=state,
                       state_to=trans.destination)
