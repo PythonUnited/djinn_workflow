@@ -27,6 +27,9 @@ def get_workflow(anything):
 
 def set_state(obj, state):
 
+    """ Set obj state, without doing the actual transition. This is mainly
+    useful for setting initial state, i.e. during creation """
+
     wf = get_workflow(obj)
 
     if type(state) in [str, unicode]:
