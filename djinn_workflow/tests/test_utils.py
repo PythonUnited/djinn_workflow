@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from djinn_workflow.utils import (
     assign_workflow, get_workflow, set_state, get_state, apply_transition)
-from djinn_workflow.models import Workflow, State, Transition
+from djinn_workflow.models import Workflow
 from djinn_workflow.signals import state_change
 
 

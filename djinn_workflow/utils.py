@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from djinn_workflow.models.modelworkflow import ModelWorkflow
 from djinn_workflow.models.workflow import Workflow
+from djinn_workflow.models.state import State
 from djinn_workflow.models.objectstate import ObjectState
 from djinn_workflow.signals import state_change
 
@@ -23,6 +24,11 @@ def get_workflow(anything):
         return ModelWorkflow.objects.get(content_type=anything).workflow
     except ModelWorkflow.DoesNotExist:
         return Workflow.objects.get(is_default=True)
+
+
+def get_default_workflow():
+
+    return Workflow.objects.get(is_default=True)
 
 
 def set_state(obj, state):
@@ -48,7 +54,10 @@ def set_state(obj, state):
         ).update(state=state)
 
 
-def get_state(obj, assume_initial=True):
+def get_state(obj, assume_initial=True, fail_silently=True):
+
+    """ If fail_siltently is True, the get_state call will return
+    an empty state """
 
     state = None
 
@@ -59,9 +68,9 @@ def get_state(obj, assume_initial=True):
     except ObjectState.DoesNotExist:
         if assume_initial:
 
-            wf = get_workflow(obj)
-
             try:
+                wf = get_workflow(obj)
+
                 obj_state = ObjectState.objects.create(
                     state=wf.initial_state,
                     object_id=obj.id,
@@ -70,7 +79,8 @@ def get_state(obj, assume_initial=True):
 
                 state = obj_state.state
             except:
-                pass
+                if fail_silently:
+                    state = State(name="no_state")
 
     return state
 

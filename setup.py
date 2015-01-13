@@ -8,6 +8,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
     'django',
+    'djinn_auth'
     ]
 
 setup(name='djinn_workflow',
