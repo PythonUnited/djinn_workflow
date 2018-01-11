@@ -5,11 +5,13 @@ from django.utils.translation import ugettext_lazy as _
 class State(models.Model):
 
     name = models.CharField(_(u"Name"), max_length=100)
-    workflow = models.ForeignKey("Workflow")
+    workflow = models.ForeignKey("Workflow", on_delete=models.CASCADE)
 
     def __unicode__(self):
 
         return "%s" % self.name
+
+    __str__ = __unicode__
 
     def get_transitions(self, obj, user):
 

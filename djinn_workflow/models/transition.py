@@ -9,15 +9,19 @@ class Transition(models.Model):
     destination = models.ForeignKey(
         "State",
         verbose_name=_(u"Destination"),
-        related_name="destination_state")
+        related_name="destination_state",
+        on_delete=models.CASCADE)
     permission = models.ForeignKey(
         Permission,
-        verbose_name=_(u"Permission"), blank=True, null=True)
-    state = models.ForeignKey("State")
+        verbose_name=_(u"Permission"), blank=True, null=True,
+        on_delete=models.CASCADE)
+    state = models.ForeignKey("State", on_delete=models.CASCADE)
 
     def __unicode__(self):
 
         return self.name
+
+    __str__ = __unicode__
 
     class Meta:
 
