@@ -38,7 +38,7 @@ def set_state(obj, state):
 
     wf = get_workflow(obj)
 
-    if type(state) in [str, unicode]:
+    if type(state) in [str]:
         state = wf.state_set.get(name=state)
 
     if not get_state(obj):
@@ -91,7 +91,7 @@ def apply_transition(obj, trans):
 
     state = get_state(obj)
 
-    if type(trans) in [str, unicode]:
+    if type(trans) in [str]:
         trans = state.transition_set.get(name=trans)
 
     set_state(obj, trans.destination)
