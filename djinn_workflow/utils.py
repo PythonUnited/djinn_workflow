@@ -91,6 +91,9 @@ def apply_transition(obj, trans):
 
     state = get_state(obj)
 
+    if not trans:
+        return
+
     if type(trans) in [str]:
         trans = state.transition_set.get(name=trans)
 
