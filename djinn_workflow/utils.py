@@ -64,8 +64,8 @@ def get_state(obj, assume_initial=True, fail_silently=True):
     try:
         state = ObjectState.objects.get(
             object_id=obj.pk,
-            # object_ct=ContentType.objects.get_for_model(obj)).state
-            object_ct=ContentType.objects.get_for_model(obj)).select_related('state').state
+            object_ct=ContentType.objects.get_for_model(obj)).state
+            # object_ct=ContentType.objects.get_for_model(obj)).select_related('state').state
     except ObjectState.DoesNotExist:
         if assume_initial:
 
